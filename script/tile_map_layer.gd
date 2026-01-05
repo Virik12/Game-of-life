@@ -4,8 +4,6 @@ const GamesizeX = 128
 const GamesizeY = 96
 const Chance = 5
 
-@onready var character_body_2d: CharacterBody2D = $CharacterBody2D
-
 func get_surroundings(Vector):
 	var cells = [];
 	for j in range(-1,2):
@@ -43,7 +41,8 @@ func generate_world(SizeX,SizeY,Chance):
 
 func _ready() -> void:
 	generate_world(GamesizeX,GamesizeY,Chance)
-	Engine.time_scale = 0.1
+	#Engine.time_scale = 0.1
+
 func _process(delta: float) -> void:
 	for i in range(1,GamesizeX + 1):
 		for j in range(1,GamesizeY + 1):
@@ -54,7 +53,7 @@ func _process(delta: float) -> void:
 				set_cell_black(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
 			elif how_many_black < 2 or how_many_black > 3:
 				set_cell_white(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
-	
+
 	#if Input.is_action_just_pressed("dalej"):
 		#for i in range(1,GamesizeX + 1):
 			#for j in range(1,GamesizeY + 1):
