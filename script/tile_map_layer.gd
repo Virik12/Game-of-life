@@ -1,5 +1,9 @@
 extends TileMapLayer
 
+const GamesizeX = 128
+const GamesizeY = 96
+const Chance = 10
+
 func get_surroundings(Vector):
 	var cells = [];
 	for j in range(-1,2):
@@ -16,14 +20,37 @@ func check_surroundings_atlas(cells):
 		var temp = get_cell_atlas_coords(cells[i])
 		if temp.y == 0:
 			how_many_black += 1
-	print(how_many_black)
+	return how_many_black
+
+func set_cell_black(Vector):
+	set_cell(Vector,1,Vector2i(0,0))
+
+func set_cell_white(Vector):
+	set_cell(Vector,1,Vector2i(0,1))
+
+func generate_world(SizeX,SizeY,Chance):
+	for i in range(1,SizeX + 1):
+		for j in range(1,SizeY + 1):
+			var rand = randi() % 101
+			#print(rand)
+			if rand<Chance:
+				set_cell_black(Vector2i(i-SizeX/2,j-SizeY/2))
+			else:
+				set_cell_white(Vector2i(i-SizeX/2,j-SizeY/2))
+
 
 
 func _ready() -> void:
-	var surroundings_cords = get_surroundings(Vector2i(0,5))
-	var how_many_black = check_surroundings_atlas(surroundings_cords)
-	pass 
-
+	generate_world(GamesizeX,GamesizeY,Chance)
+	Engine.time_scale = 0.1
 
 func _process(delta: float) -> void:
-	pass
+	for i in range(1,GamesizeX + 1):
+		for j in range(1,GamesizeY + 1):
+			var surroundings_cords=get_surroundings(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
+			var how_many_black=check_surroundings_atlas(surroundings_cords)
+			
+			if how_many_black == 3:
+				set_cell_black(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
+			elif how_many_black < 2 or how_many_black >3:
+				set_cell_white(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
