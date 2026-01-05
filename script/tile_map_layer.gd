@@ -39,7 +39,6 @@ func generate_world(SizeX,SizeY,Chance):
 				set_cell_white(Vector2i(i-SizeX/2,j-SizeY/2))
 
 
-
 func _ready() -> void:
 	generate_world(GamesizeX,GamesizeY,Chance)
 	Engine.time_scale = 0.1
@@ -52,5 +51,5 @@ func _process(delta: float) -> void:
 			
 			if how_many_black == 3:
 				set_cell_black(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
-			elif how_many_black < 2 or how_many_black >3:
+			elif how_many_black < 2 or how_many_black > 3:
 				set_cell_white(Vector2i(i-GamesizeX/2,j-GamesizeY/2))
