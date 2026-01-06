@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://byhc7t78t7rxa"]
+
+[ext_resource type="Script" path="res://script/mainmenu.gd" id="1_cf8sw"]
+[ext_resource type="Texture2D" uid="uid://bwtvalno2awqd" path="res://background.png" id="2_ngowo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vsun5"]
+texture = ExtResource("2_ngowo")
+modulate_color = Color(1, 1, 1, 0.584314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11y1s"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im3kn"]
+bg_color = Color(0.964706, 0.964706, 0.964706, 0.560784)
+
+[node name="mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cf8sw")
+
+[node name="Panel" type="Panel" parent="."]
+light_mask = 128
+visibility_layer = 128
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_vsun5")
+
+[node name="Włącz" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 306.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_11y1s")
+text = "Włącz"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 321.0
+offset_right = -34.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Conway's Game of Life"
+
+[node name="Błędny program" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -135.0
+offset_right = 544.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Włącz błędny program"
+
+[node name="Panel" type="Panel" parent="Błędny program"]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3kn")
+
+[connection signal="pressed" from="Włącz" to="." method="_on_włącz_pressed"]
+[connection signal="toggled" from="Błędny program" to="." method="_on_błędny_program_toggled"]
