@@ -4,6 +4,7 @@ const GAMESIZEX = 64
 const GAMESIZEY = 48
 const CHANCE = 20
 const GAMESPEED = 1
+var BłĘDNY_PROGRAM
 
 func get_surroundings(Vector):
 	var cells = [];
@@ -70,6 +71,7 @@ func simulation():
 func _ready() -> void:
 	generate_world(GAMESIZEX,GAMESIZEY,CHANCE)
 	Engine.time_scale = GAMESPEED
+	
 
 func _process(delta: float) -> void:
 	#bad_simulation()
