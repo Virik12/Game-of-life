@@ -75,13 +75,21 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#bad_simulation()
-	simulation()
+	#simulation()
 	pass
 
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("dalej"):
+	if Input.is_action_pressed("dalej"):
 		#bad_simulation()
-		#simulation()
+		simulation()
 		pass
+		
+	if Input.is_action_just_pressed("right_click"):
+		var mouse_possition:Vector2
+		mouse_possition=get_global_mouse_position()
+		mouse_possition=mouse_possition/16
+		mouse_possition.x -= 1
+		mouse_possition.y -= 1
+		set_cell_blackV2(mouse_possition)
