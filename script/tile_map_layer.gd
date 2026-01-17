@@ -2,7 +2,7 @@ extends TileMapLayer
 
 const GAMESIZEX = 64
 const GAMESIZEY = 48
-const CHANCE = 20
+const CHANCE = 00
 const GAMESPEED = 1
 var BłĘDNY_PROGRAM
 
@@ -84,12 +84,22 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("dalej"):
 		#bad_simulation()
 		simulation()
-		pass
-		
+	
+	
+	if Input.is_action_just_pressed("1 dalej"):
+		simulation()
+	
 	if Input.is_action_just_pressed("right_click"):
 		var mouse_possition:Vector2
 		mouse_possition=get_global_mouse_position()
 		mouse_possition=mouse_possition/16
-		mouse_possition.x -= 1
-		mouse_possition.y -= 1
-		set_cell_blackV2(mouse_possition)
+		if mouse_possition.x<0:
+			mouse_possition.x -= 1
+		if mouse_possition.y<0:
+			mouse_possition.y -= 1
+		
+		var temp:Vector2 = get_cell_atlas_coords(mouse_possition)
+		if temp.y == 1:
+			set_cell_blackV2(mouse_possition)
+		else:
+			set_cell_whiteV2(mouse_possition)
