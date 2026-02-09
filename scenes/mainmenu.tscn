@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://byhc7t78t7rxa"]
+[gd_scene load_steps=8 format=3 uid="uid://byhc7t78t7rxa"]
 
 [ext_resource type="Script" path="res://script/mainmenu.gd" id="1_cf8sw"]
 [ext_resource type="Texture2D" uid="uid://bwtvalno2awqd" path="res://background.png" id="2_ngowo"]
+[ext_resource type="Script" path="res://script/pokarz.gd" id="3_o32h7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vsun5"]
 texture = ExtResource("2_ngowo")
@@ -17,6 +18,10 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im3kn"]
 bg_color = Color(0.964706, 0.964706, 0.964706, 0.560784)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tyapv"]
+color = Color(0.129412, 0.352941, 0.968627, 1)
+thickness = 6
+
 [node name="mainmenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -26,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cf8sw")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="background" type="Panel" parent="."]
 light_mask = 128
 visibility_layer = 128
 z_index = -10
@@ -48,7 +53,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_11y1s")
 text = "Włącz"
 
-[node name="Label" type="Label" parent="."]
+[node name="Tytul" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -60,8 +65,207 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "Conway's Game of Life"
 
-[node name="Błędny program" type="CheckButton" parent="."]
+[node name="ustawienia" type="Node" parent="."]
+
+[node name="Wielkość Gry" type="Panel" parent="ustawienia"]
+z_index = -10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = 47.0
+offset_right = 143.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3kn")
+
+[node name="Label" type="Label" parent="ustawienia/Wielkość Gry"]
 layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.5
+offset_top = 7.0
+offset_right = 54.5
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Wielkość Gry"
+
+[node name="X" type="SpinBox" parent="ustawienia/Wielkość Gry"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -26.5
+offset_right = -4.9375
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1000.0
+value = 64.0
+
+[node name="Y" type="SpinBox" parent="ustawienia/Wielkość Gry"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 16.5
+offset_right = -4.9375
+offset_bottom = 47.5
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1000.0
+value = 48.0
+
+[node name="X2" type="Label" parent="ustawienia/Wielkość Gry"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.5
+offset_top = 40.0
+offset_right = 62.5
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "X"
+
+[node name="Y2" type="Label" parent="ustawienia/Wielkość Gry"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_top = 84.0
+offset_right = 61.5
+offset_bottom = 107.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Y"
+
+[node name="Szanse" type="Panel" parent="ustawienia"]
+z_index = -10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 176.0
+offset_top = 97.0
+offset_right = 297.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3kn")
+
+[node name="Label" type="Label" parent="ustawienia/Szanse"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_right = 57.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Szanse"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="ustawienia/Szanse"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = 14.5
+offset_right = 51.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tyapv")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_tyapv")
+value = 10.0
+
+[node name="Pokarz" type="Label" parent="ustawienia/Szanse/HSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -34.0
+offset_right = 20.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10%"
+horizontal_alignment = 1
+script = ExtResource("3_o32h7")
+
+[node name="GameSpeed" type="Panel" parent="ustawienia"]
+visible = false
+z_index = -10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 331.0
+offset_top = 96.0
+offset_right = 452.0
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3kn")
+
+[node name="Label" type="Label" parent="ustawienia/GameSpeed"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_top = 5.0
+offset_right = 70.5
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Gamespeed"
+
+[node name="HSlider" type="HSlider" parent="ustawienia/GameSpeed"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = 14.5
+offset_right = 51.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tyapv")
+max_value = 10.0
+value = 10.0
+
+[node name="Błędny program" type="CheckButton" parent="ustawienia"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -83,7 +287,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Włącz błędny program"
 
-[node name="Panel" type="Panel" parent="Błędny program"]
+[node name="Panel" type="Panel" parent="ustawienia/Błędny program"]
 z_index = -10
 layout_mode = 1
 anchors_preset = 15
@@ -95,4 +299,8 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_im3kn")
 
 [connection signal="pressed" from="Włącz" to="." method="_on_włącz_pressed"]
-[connection signal="toggled" from="Błędny program" to="." method="_on_błędny_program_toggled"]
+[connection signal="value_changed" from="ustawienia/Wielkość Gry/X" to="." method="_on_x_value_changed"]
+[connection signal="value_changed" from="ustawienia/Wielkość Gry/Y" to="." method="_on_y_value_changed"]
+[connection signal="value_changed" from="ustawienia/Szanse/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="ustawienia/Szanse/HSlider" to="ustawienia/Szanse/HSlider/Pokarz" method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="ustawienia/Błędny program" to="." method="_on_błędny_program_toggled"]

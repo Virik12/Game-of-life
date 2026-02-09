@@ -1,10 +1,10 @@
 extends TileMapLayer
 
-const GAMESIZEX = 64
-const GAMESIZEY = 48
-const CHANCE = 00
-const GAMESPEED = 1
-var BłĘDNY_PROGRAM
+var GAMESIZEX = Ustawienia.GAMESIZEX
+var GAMESIZEY = Ustawienia.GAMESIZEY
+var CHANCE = Ustawienia.CHANCE
+var GAMESPEED = Ustawienia.GAMESPEED
+var BłĘDNY_PROGRAM = Ustawienia.BłĘDNY_PROGRAM
 
 func get_surroundings(Vector):
 	var cells = [];
@@ -58,7 +58,7 @@ func bad_simulation():
 			elif how_many_black < 2 or how_many_black > 3:
 				set_cell_whiteV2(Vector2i(i-GAMESIZEX/2,j-GAMESIZEY/2))
 
-func simulation():
+func good_simulation():
 	var store_data:Array =[]
 	for i in range(1,GAMESIZEX + 1):
 		for j in range(1,GAMESIZEY + 1):
@@ -68,26 +68,30 @@ func simulation():
 	for i in range(GAMESIZEX*GAMESIZEY):
 		set_cell_V3(store_data[i])
 
+func do_simulation():
+	if BłĘDNY_PROGRAM==true:
+		bad_simulation()
+	else:
+		good_simulation()
+
 func _ready() -> void:
 	generate_world(GAMESIZEX,GAMESIZEY,CHANCE)
 	Engine.time_scale = GAMESPEED
 	
 
 func _process(delta: float) -> void:
-	#bad_simulation()
-	#simulation()
+	#do_simulation()
 	pass
 
 
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("dalej"):
-		#bad_simulation()
-		simulation()
+		do_simulation()
 	
 	
 	if Input.is_action_just_pressed("1 dalej"):
-		simulation()
+		do_simulation()
 	
 	if Input.is_action_just_pressed("right_click"):
 		var mouse_possition:Vector2
